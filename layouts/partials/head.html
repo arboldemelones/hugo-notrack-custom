@@ -18,4 +18,6 @@
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
+    <script type="module" src="https://esm.run/@thi.ng/pixel-dither"></script>
+    <script type="module" src="https://esm.run/@thi.ng/pixel"></script>
 </head>
