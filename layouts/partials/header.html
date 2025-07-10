@@ -73,7 +73,6 @@
 
 <script>
     const container = document.getElementById('container');
-    let dithered;
 
     function redraw() {
         const w = container.clientWidth || window.innerWidth;
@@ -96,18 +95,23 @@
         // Convert to data URL
         const dataURL = canvas.toDataURL('image/png');
 
-        // Create or update the dithered image
-        if (!dithered) {
-            dithered = document.createElement('as-dithered-image');
-            dithered.setAttribute('crunch', '1');
-            dithered.setAttribute('alt', 'Green to white dithered gradient');
-            dithered.style.display = 'block';
-            dithered.style.width = '100%';
-            dithered.style.height = h + 'px';
-            container.appendChild(dithered);
-        }
-        dithered.src = dataURL;
+        // Remove previous dithered image if any
+        container.innerHTML = '';
+
+        // Create and append the dithered image
+        const dithered = document.createElement('as-dithered-image');
+        dithered.setAttribute('crunch', '1');
+        dithered.setAttribute('alt', 'Green to white dithered gradient');
+        dithered.style.display = 'block';
+        dithered.style.width = '100%';
         dithered.style.height = h + 'px';
+        container.appendChild(dithered);
+
+        // Set src AFTER appending to DOM
+        setTimeout(() => {
+            dithered.src = dataURL;
+            dithered.style.height = h + 'px';
+        }, 0);
     }
 
     // Initial draw
