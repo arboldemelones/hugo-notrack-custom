@@ -73,38 +73,47 @@
 
 <script>
     const container = document.getElementById('container');
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
     let dithered;
 
     function redraw() {
-        const w = container.clientWidth;
-        const h = container.clientHeight;
+        const w = container.clientWidth || window.innerWidth;
+        const h = container.clientHeight || 80; // fallback height
 
+        // Create a canvas for the gradient
+        const canvas = document.createElement('canvas');
         canvas.width = w * devicePixelRatio;
         canvas.height = h * devicePixelRatio;
+        const ctx = canvas.getContext('2d');
         ctx.scale(devicePixelRatio, devicePixelRatio);
 
+        // Draw the gradient
         const grad = ctx.createLinearGradient(0, 0, w, 0);
         grad.addColorStop(0, '#009900');
         grad.addColorStop(1, '#ffffff');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
+        // Convert to data URL
         const dataURL = canvas.toDataURL('image/png');
 
+        // Create or update the dithered image
         if (!dithered) {
             dithered = document.createElement('as-dithered-image');
             dithered.setAttribute('crunch', '1');
             dithered.setAttribute('alt', 'Green to white dithered gradient');
+            dithered.style.display = 'block';
+            dithered.style.width = '100%';
+            dithered.style.height = h + 'px';
             container.appendChild(dithered);
         }
-
         dithered.src = dataURL;
+        dithered.style.height = h + 'px';
     }
 
+    // Initial draw
     redraw();
+
+    // Redraw on resize
     window.addEventListener('resize', () => {
         clearTimeout(window.__resizeTimeout);
         window.__resizeTimeout = setTimeout(redraw, 150);
