@@ -69,16 +69,18 @@
     </nav>
 </header>
 <script src="/js/as-dithered-image.js"></script>
-<as-dithered-image id="dithered" alt="Green to white dithered gradient" crunch="2"></as-dithered-image>
+<div id="container"></div>
+
 <script>
-    const dithered = document.getElementById('dithered');
+    const container = document.getElementById('container');
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
+    let dithered;
+
     function redraw() {
-        const style = getComputedStyle(dithered);
-        const w = parseInt(style.width);
-        const h = parseInt(style.height);
+        const w = container.clientWidth;
+        const h = container.clientHeight;
 
         canvas.width = w * devicePixelRatio;
         canvas.height = h * devicePixelRatio;
@@ -90,16 +92,21 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
-        dithered.src = canvas.toDataURL('image/png', 1);
+        const dataURL = canvas.toDataURL('image/png');
+
+        if (!dithered) {
+            dithered = document.createElement('as-dithered-image');
+            dithered.setAttribute('crunch', '1');
+            dithered.setAttribute('alt', 'Green to white dithered gradient');
+            container.appendChild(dithered);
+        }
+
+        dithered.src = dataURL;
     }
 
-    // Initial
     redraw();
-
-    // Re-dither when resized
-    let resizeTimeout;
     window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(redraw, 150);
+        clearTimeout(window.__resizeTimeout);
+        window.__resizeTimeout = setTimeout(redraw, 150);
     });
 </script>
