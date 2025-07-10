@@ -90,7 +90,7 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
-        dithered.src = canvas.toDataURL();
+        dithered.src = canvas.toDataURL('image/png', 1);
     }
 
     // Initial
