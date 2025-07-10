@@ -8,7 +8,7 @@ let height = 150;
 
 const observer = new ResizeObserver((entries) => {
   width = canvas.clientWidth;
-  height = 150;
+  height = 20;
 });
 observer.observe(canvas)
 
@@ -34,5 +34,11 @@ function render(time) {
 }
 requestAnimationFrame(render);
 
+const root = document.getElementById("app");
+root.appendChild(img);
+
 const img = intBufferFromCanvas(canvas);
-ditherWith(ATKINSON, img);
+const ditherCanvas = canvasFromPixelBuffer(ditherWith(ATKINSON, img), root);
+
+canvas.remove();
+observer.observe(ditherCanvas)
