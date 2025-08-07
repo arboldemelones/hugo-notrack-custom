@@ -1,6 +1,6 @@
 <header class="page-header">
     <div class="myname">
-        <h2><a href="{{ default .Site.Home .Site.BaseURL }}"><img src="/img/logo3.png"></a></h2>
+        <h2><a href="{{ default .Site.Home .Site.BaseURL }}" class="head_link"><img src="/img/logo4.png" class="image_header"></a></h2>
     </div>
     <nav>
         <ul class="navbar">
@@ -67,59 +67,7 @@
             {{- end }}
         </ul>
     </nav>
+    <script src="/js/as-dithered-image.js"></script>
+    <as-dithered-image src="/img/gradient3.png" crunch="3" darkrgba="rgba(0, 153, 0, 255)" cutoff="0.8" class="hline"></as-dithered-image>
+    
 </header>
-<script src="/js/as-dithered-image.js"></script>
-<div id="container"></div>
-
-<script>
-    const container = document.getElementById('container');
-
-    function redraw() {
-        const w = container.clientWidth || window.innerWidth;
-        const h = container.clientHeight || 80; // fallback height
-
-        // Create a canvas for the gradient
-        const canvas = document.createElement('canvas');
-        canvas.width = w * devicePixelRatio;
-        canvas.height = h * devicePixelRatio;
-        const ctx = canvas.getContext('2d');
-        ctx.scale(devicePixelRatio, devicePixelRatio);
-
-        // Draw the gradient
-        const grad = ctx.createLinearGradient(0, 0, w, 0);
-        grad.addColorStop(0, '#009900');
-        grad.addColorStop(1, '#ffffff');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-
-        // Convert to data URL
-        const dataURL = canvas.toDataURL('image/png');
-
-        // Remove previous dithered image if any
-        container.innerHTML = '';
-
-        // Create and append the dithered image
-        const dithered = document.createElement('as-dithered-image');
-        dithered.setAttribute('crunch', '1');
-        dithered.setAttribute('alt', 'Green to white dithered gradient');
-        dithered.style.display = 'block';
-        dithered.style.width = '100%';
-        dithered.style.height = h + 'px';
-        container.appendChild(dithered);
-
-        // Set src AFTER appending to DOM
-        setTimeout(() => {
-            dithered.src = dataURL;
-            dithered.style.height = h + 'px';
-        }, 0);
-    }
-
-    // Initial draw
-    redraw();
-
-    // Redraw on resize
-    window.addEventListener('resize', () => {
-        clearTimeout(window.__resizeTimeout);
-        window.__resizeTimeout = setTimeout(redraw, 150);
-    });
-</script>

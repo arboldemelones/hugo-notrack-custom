@@ -1,9 +1,10 @@
 // Colors
+$verde-chulo: #009900;
 $midnight-blue: #07608f;
 $midnight-matte: #4c7e99;
 $text-color: #444;
 $tab-border-color: #ddd;
-$tab-active-color: #474a4f;
+$tab-active-color: $verde-chulo;
 $heading-gray: #333;
 $caption-color: #ccc;
 $close-button-gray: #f1f1f1;
@@ -17,7 +18,6 @@ $medium-light-text: #4f4a5f;
 $code-background: #f3f3f3;
 $codeblock-background: #f6f8fa;
 $code-text: #f8f8f2;
-$verde-chulo: #009900;
 
 // Breakpoints
 $bp-mini: 28em; // 288px
@@ -49,10 +49,12 @@ $header-line-height: 1.25;
 html {
     margin: 0;
     height: 100vh;
+    padding: 0;
 }
 
 body {
     margin: 0;
+    padding: 0;
     min-height: 100vh;
     overflow-y: scroll;
     font-size: $base-font-size * 1.1;
@@ -292,11 +294,15 @@ nav {
     overflow: hidden;
     margin: auto 2% .6em auto;
     padding-left: 2em;
+    text-align: center;
 }
 
 nav ul {
     list-style-type: none;
     margin: 0;
+    padding: 1.5vh 0px 0px 0px;
+    display: inline-block;
+    text-align: center;
 }
 
 nav li {
@@ -311,16 +317,33 @@ nav li {
     display: inline-block;
 }
 
+nav ul li {
+    display: inline-block;
+}
+
 nav a {
     color: $text-color;
-    padding: .25em .63em;
-    font-family: FreeSans, sans-serif;
-    font-size: 1.2em;
-    display: block;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    span {
+        display: flex;
+        padding: 0em .25em 0em;
+        margin-bottom: -3px;
+        font-family: FsJenson;
+        font-style: italic;
+        font-size: 3em;
+        line-height: 0.8;
+    }
 }
 
 nav li:hover {
     border-color: $tab-border-color;
+    color: $verde-chulo;
+}
+
+nav a:not(li.activetab a):hover {
+    color: $verde-chulo;
 }
 
 .dropdown .sub-menu {
@@ -331,9 +354,13 @@ nav li:hover {
     cursor: pointer;
     border-width: 0 0 .3em 0;
     min-width: 6em;
-    margin-top: .3em;
+    margin-top: 0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+}
+
+.dropdown:hover {
+    color: $verde-chulo;
 }
 
 .dropdown:hover .sub-menu {
@@ -341,15 +368,18 @@ nav li:hover {
 }
 
 .sub-menu a:hover {
-    background-color: $tab-active-color;
-    color: white;
+    //background-color: $tab-active-color;
+    color: $verde-chulo;
 }
 
 .sub-menu a {
     display: block;
     text-align: left;
-    padding: .2em .63em;
+    padding: .1vh 1vw;
     color: $text-color;
+    font-family: FsJenson;
+    font-style: italic;
+    font-size: 2em;
 }
 
 .dropdown.activetab,
@@ -369,12 +399,12 @@ a.activetab {
     text-align: center;
     display: flex;
     flex-flow: row wrap;
-    margin: 1em 1em 0 1em;
+    margin: 2vh 1.5vw 0;
 }
 
 .myname {
-    margin: 0 auto 0 0;
-    padding: 0 0 .25em .25em;
+    margin: 0 10vw 0 0;
+    padding: 0 0 0 .25em;
     font-size: 2em;
 }
 
@@ -481,7 +511,6 @@ em.taxonomy-emph {
         color: $text-color;
         padding: .5em;
         flex-grow: 1;
-        text-transform: capitalize;
     }
 }
 
@@ -900,16 +929,15 @@ cite {
 }
 
 footer {
-    position: fixed;
+    position: relative; // or just remove the position property
     width: 100vw;
+    background-color: #f7f7f7;
     color: #444;
     font-size: .8em;
-    padding-left: 1em;
-    padding-top: .2em;
-    padding-bottom: .1em;
-    bottom: 0;
-    left: 0;
-    background-color: #f7f7f7;
+    padding: .2em 0 .1em 0;
+    text-align: center;
+    z-index: 100;
+    flex-shrink: 0;
 }
 
 // NEW COMPONENTS
@@ -920,8 +948,37 @@ canvas {
     display: block;
 }
 
-as-dithered-image {
+as-dithered-image.hline {
     display: block;
     width: 100%;
     height: 30px;
+    position: absolute;
+    top: 9vh;
+}
+
+as-dithered-image {
+    display: block;
+    height: 51px;
+    width: 131px;
+}
+
+.head_link {
+    padding: 0;
+}
+
+img.image_header {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 6vh;
+}
+
+.site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    flex: 1 0 auto;
 }

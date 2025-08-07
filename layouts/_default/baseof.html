@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head.html" . -}}
-    <body>
-        {{- partial "header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
+    <body {{ with .Params.articlebg }} style="background-image: url('{{ . }}'); background-size: cover;"{{ end }}>
+        <div class="site-wrapper">
+            {{- partial "header.html" . -}}
+            <div id="content">
+                {{- block "main" . }}{{- end }}
+            </div>
+            {{- partial "footer.html" . -}}
         </div>
-        {{- partial "footer.html" . -}}
     </body>
 </html>

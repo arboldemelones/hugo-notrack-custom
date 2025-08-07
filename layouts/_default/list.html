@@ -24,8 +24,10 @@
             {{ end }}
 
             {{ range $taxonomyName, $taxonomy := .Site.Taxonomies }}
-                {{ if or (in $taxonomyName "categ") (in $taxonomyName "tag") }}
-            <li><a href="{{ $taxonomyName | relURL }}">{{ $taxonomyName }}</a></li>
+                {{ if (in $taxonomyName "categ") }}
+            <li><a href="{{ $taxonomyName | relURL }}">Categorías</a></li>
+                {{ else if (in $taxonomyName "tag") }}
+            <li><a href="{{ $taxonomyName | relURL }}">Etiquetas</a></li>
                 {{ end }}
             {{ end }}
         </ul>
