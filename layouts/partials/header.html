@@ -1,6 +1,6 @@
 <header class="page-header">
     <div class="myname">
-        <h2><a href="{{ default .Site.Home .Site.BaseURL }}" class="head_link"><img src="/img/logo4.png" class="image_header"></a></h2>
+        <a href="{{ default .Site.Home .Site.BaseURL }}" class="head_link"><img src="/img/logo4.png" class="image_header"></a>
     </div>
     <nav>
         <ul class="navbar">
@@ -67,7 +67,8 @@
             {{- end }}
         </ul>
     </nav>
-    <script src="/js/as-dithered-image.js"></script>
-    <as-dithered-image src="/img/gradient3.png" crunch="3" darkrgba="rgba(0, 153, 0, 255)" cutoff="0.8" class="hline"></as-dithered-image>
+    {{/*  <script src="/js/as-dithered-image.js"></script>
+    <as-dithered-image src="/img/gradient3.png" crunch="3" darkrgba="rgba(0, 153, 0, 255)" cutoff="0.8" class="hline"></as-dithered-image>  */}}
+    <img src="/img/gradienteordenado1.png" class="dithered-image">
     
 </header>

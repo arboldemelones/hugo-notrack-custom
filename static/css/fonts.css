@@ -111,3 +111,30 @@
     src: url(../fonts/FsJensonItalic.ttf);
     font-style: italic;
 }
+
+@font-face 
+{
+    font-family: Pagella;
+    src: url(../fonts/texgyrepagella-regular.otf);
+    font-style: normal;
+}
+@font-face 
+{
+    font-family: Pagella;
+    src: url(../fonts/texgyrepagella-italic.otf);
+    font-style: italic;
+}
+
+@font-face 
+{
+    font-family: IBMPlexMono;
+    src: url(../fonts/IBMPlexMono-Text.woff2);
+    font-style: monospace;
+}
+
+@font-face 
+{
+    font-family: IBMPlexMono;
+    src: url(../fonts/IBMPlexMono-TextItalic.woff2);
+    font-style: italic;
+}

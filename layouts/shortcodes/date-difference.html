@@ -1,0 +1,17 @@
+<span class="date">{{ (.Get 0) }}</span>
+<script>
+function getUserAgeInFullYears(dateOfBirth, comparisonDate = new Date()) {
+  const yearsDifference = comparisonDate.getFullYear() - dateOfBirth.getFullYear();
+  const monthsDifference = comparisonDate.getMonth() - dateOfBirth.getMonth();
+  const daysDifference = comparisonDate.getDate() - dateOfBirth.getDate();
+
+  const doNotSubtractOne = monthsDifference > 0 || (monthsDifference === 0 && daysDifference >= 0);
+  return doNotSubtractOne ? yearsDifference : yearsDifference - 1;
+}
+
+var dateElements = document.getElementsByClassName("date");
+for (var i = 0; i < dateElements.length; i++) {
+    // Replace the date with the number of years since it occurred
+    dateElements[i].innerHTML = getUserAgeInFullYears(new Date(dateElements[i].innerHTML));
+}
+</script>

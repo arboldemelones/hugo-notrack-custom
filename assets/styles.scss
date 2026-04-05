@@ -1,23 +1,27 @@
 // Colors
 $verde-chulo: #009900;
+$verde-chulo-muted: #aeddae;
 $midnight-blue: #07608f;
 $midnight-matte: #4c7e99;
-$text-color: #444;
+$text-color: #231b1b;
 $tab-border-color: #ddd;
 $tab-active-color: $verde-chulo;
-$heading-gray: #333;
+$heading-gray: $text-color; // #333;
 $caption-color: #ccc;
 $close-button-gray: #f1f1f1;
 $close-hover-gray: #bbb;
 $contactlinks-color: #eee;
 $contactlinks-text-color: #524e59;
 $cv-red: #b25347;
-$light-text: #5f5a6f;
+$light-text: #575757;
 $very-light-text: #767676;
 $medium-light-text: #4f4a5f;
 $code-background: #f3f3f3;
 $codeblock-background: #f6f8fa;
 $code-text: #f8f8f2;
+$main-font: Pagella, serif;
+$secondary-font: IBMPlexMono, monospace;
+$fancy-font: FsJenson, serif;
 
 // Breakpoints
 $bp-mini: 28em; // 288px
@@ -38,13 +42,32 @@ $mq-xxlarge: "(min-width: #{$bp-xxlarge})";
 $mq-retina: "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
 
 // Font-Size
-$base-font-size: 1.1em;
+$base-font-size: 17px;
+$font-size-heading: 1.3em;
+$font-size-header: 1.8em;
 
 // Line-Height
-$base-line-height: 1.1;
+$base-line-height: 1.5em;
 $header-line-height: 1.25;
 
+// Layout
+$content-max-width: 1000px;
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 2.5rem;
+$spacing-3xl: 4rem;
+
 // HUGO
+
+// SVG Filter Definitions for Bayer Dither Effect
+svg.filter-definitions {
+    display: none;
+    width: 0;
+    height: 0;
+}
 
 html {
     margin: 0;
@@ -57,25 +80,25 @@ body {
     padding: 0;
     min-height: 100vh;
     overflow-y: scroll;
-    font-size: $base-font-size * 1.1;
-    line-height: $base-line-height * 1.1;
-    font-family: FreeSerif, serif;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-family: Pagella, serif;
 
     @media #{$mq-medium} {
-        font-size: $base-font-size*1.2;
-        line-height: $base-line-height*1.2;
+        font-size: $base-font-size;
+        line-height: $base-line-height;
     }
 
     @media #{$mq-large} {
-        font-size: $base-font-size*1.3;
+        font-size: $base-font-size*1.1;
     }
 
     @media #{$mq-xlarge} {
-        font-size: $base-font-size*1.4;
+        font-size: $base-font-size*1.2;
     }
 
     @media #{$mq-xxlarge} {
-        font-size: $base-font-size*1.6;
+        font-size: $base-font-size*1.3;
     }
 }
 
@@ -85,6 +108,8 @@ main {
     margin: 0;
     padding: 1em 1em;
     background-color: white;
+    position: relative;
+    max-width: $content-max-width;
 
     @media #{$mq-small} {
         margin: 0 15%;
@@ -108,9 +133,16 @@ main {
 }
 
 a {
-    font-family: FreeSerif, serif;
-    color: $midnight-blue;
+    font-family: $main-font;
+    color: $text-color;
     text-decoration: none;
+    border-bottom: 2px solid $verde-chulo;
+    transition: background-color 0s, color 0s;
+}
+
+a:hover {
+    background-color: $verde-chulo;
+    color: white;
 }
 
 h1,
@@ -119,42 +151,96 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: FreeSans, sans-serif;
-    font-weight: bold;
-    font-style: normal;
+    font-family: $secondary-font;
     color: $heading-gray;
+    font-size: $font-size-heading;
+    margin-top: $spacing-xl;
+}
+
+h1 {
+    font-size: $font-size-heading;
+}
+
+h2 {
+    font-size: $font-size-heading;
+}
+
+h3 {
+    font-size: $font-size-heading*0.9;
+}
+
+h4 {
+    font-size: $font-size-heading*0.85;
+}
+
+h5 {
+    font-size: $font-size-heading*0.8;
+}
+
+h6 {
+    font-size: $font-size-heading*0.75;
+}
+
+h1::before {
+    color: $verde-chulo;
+    content: "// ";
+}
+
+h2::before {
+    color: $verde-chulo;
+    content: "↳ ";
+}
+
+h3::before {
+    color: $verde-chulo;
+    content: "// ";
+}
+
+h4::before {
+    color: $verde-chulo;
+    content: "// ";
+}
+
+h5::before {
+    color: $verde-chulo;
+    content: "// ";
+}
+
+h6::before {
+    color: $verde-chulo;
+    content: "// ";
 }
 
 p,
 li {
     color: $text-color;
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     text-align: justify;
 }
 
 strong {
     font-style: normal;
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-weight: bold;
 }
 
 em {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-style: italic;
 }
 
 em strong {
     font-style: italic;
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-weight: bold;
 }
 
 kbd,
 code {
-    font-family: Mononoki, monospace;
-    color: $text-color;
-    background-color: $code-background;
-    font-size: 0.9em;
+    font-family: $secondary-font;
+    //background-color: $code-background;
+    font-size: inherit;
+    font-weight: normal;
 }
 
 pre {
@@ -168,18 +254,18 @@ pre {
 }
 
 th {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-weight: bold;
     color: $text-color;
 }
 
 td {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     color: $text-color;
 }
 
 .footnotes ol li {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-size: 0.8em;
 }
 
@@ -239,14 +325,14 @@ figure.left:first-child,
 }
 
 figure.frame {
-    background-color: #f7f7f7;
-    border: 1px solid #bbb;
+    //background-color: #f7f7f7;
+    //border: 1px solid #bbb;
     border-radius: 0.2em;
     padding: 0.5em;
     box-sizing: border-box;
 
     img {
-        border: 1px solid #bbb;
+        //border: 1px solid #bbb;
     }
 
     figcaption {
@@ -264,8 +350,10 @@ figcaption {
 
     p {
         margin-top: 0em;
-        color: #666674;
-        text-align: left;
+        color: $light-text;
+        text-align: center;
+        font-family: $secondary-font;
+        //font-weight: bold;
     }
 
     h4 {
@@ -277,12 +365,13 @@ figcaption {
 
 .page-title {
     text-align: center;
-    font-size: 1.9em;
+    font-size: 1.7em;
 }
 
 .page-title.blog {
     text-align: left;
     margin-bottom: 0.5em;
+    margin-top: 0.5rem;
 }
 
 // NAVBAR
@@ -311,9 +400,9 @@ nav li {
     cursor: pointer;
     padding: 0;
     margin: 0;
-    border-width: 0 0 .3em 0;
-    border-color: transparent;
-    border-style: solid;
+    // border-width: 0 0 .3em 0;
+    // border-color: transparent;
+    // border-style: solid;
     display: inline-block;
 }
 
@@ -335,6 +424,7 @@ nav a {
         font-size: 3em;
         line-height: 0.8;
     }
+    border: none;
 }
 
 nav li:hover {
@@ -343,7 +433,7 @@ nav li:hover {
 }
 
 nav a:not(li.activetab a):hover {
-    color: $verde-chulo;
+    background-color: $verde-chulo;
 }
 
 .dropdown .sub-menu {
@@ -369,7 +459,8 @@ nav a:not(li.activetab a):hover {
 
 .sub-menu a:hover {
     //background-color: $tab-active-color;
-    color: $verde-chulo;
+    background-color: $verde-chulo;
+    color: white;
 }
 
 .sub-menu a {
@@ -395,12 +486,19 @@ a.activetab {
 }
 
 .page-header {
-    //border-bottom: 1px solid $verde-chulo;
+    // full-bleed header that reaches the viewport edges while keeping inner layout intact
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 2vh 1.5vw 2.2vh;
+    box-sizing: border-box;
+    background-color: white;
     text-align: center;
     display: flex;
     flex-flow: row wrap;
-    margin: 2vh 1.5vw 0;
+    z-index: 2;
 }
+//
 
 .myname {
     margin: 0 10vw 0 0;
@@ -411,7 +509,7 @@ a.activetab {
 .myname a {
     color: black;
     text-decoration: none;
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-style: italic;
     font-weight: bold;
 }
@@ -443,44 +541,47 @@ a.activetab {
 // BLOG
 
 .blog-post-title {
-    margin-bottom: 0.2em;
+    margin-bottom: $spacing-md;
     padding-bottom: 0;
-    font-size: 1.6em;
+    font-family: $secondary-font;
+    font-size: 1.55em;
 
     a {
         color: $heading-gray;
-        font-family: FreeSans, sans-serif;
+        font-family: $secondary-font;
     }
 }
 
 .blog-post-info {
     margin: 0.2em 0;
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: $light-text;
     margin-left: 1em;
     text-align: left;
+    font-family: $secondary-font;
 
     a {
         text-transform: capitalize;
+        font-family: $secondary-font;
     }
 }
 
 em.taxonomy-emph {
-    font-family: FreeSans, sans-serif;
+    font-family: $secondary-font;
     font-style: oblique;
 }
 
 .blog-post-content {
     h1 {
-        font-size: 1.4em;
-    }
-
-    h2 {
         font-size: 1.3em;
     }
 
+    h2 {
+        font-size: 1.25em;
+    }
+
     h3 {
-        font-size: 1.2em;
+        font-size: 1.15em;
     }
 
     h4 {
@@ -516,7 +617,7 @@ em.taxonomy-emph {
 
 .pagination {
     list-style-type: none;
-    font-family: FreeSans, sans-serif;
+    font-family: $secondary-font;
     display: flex;
     justify-content: center;
     margin: 1em;
@@ -581,7 +682,7 @@ em.taxonomy-emph {
 
     ul,
     ol {
-        font-family: FreeSans, sans-serif;
+        font-family: $secondary-font;
         margin-top: 0;
     }
 
@@ -619,7 +720,7 @@ em.taxonomy-emph {
     ul,
     ol,
     li {
-        font-family: FreeSerif, serif;
+        font-family: $main-font;
         color: $light-text;
         text-align: left;
         font-size: 0.9em;
@@ -627,7 +728,7 @@ em.taxonomy-emph {
 }
 
 p.resume-subcategory {
-    font-family: FreeSans, sans-serif;
+    font-family: $secondary-font;
     font-size: 1.4em;
     text-decoration: underline;
     padding: 0 0 .3em 0;
@@ -661,7 +762,7 @@ p.resume-subcategory {
                 white-space: nowrap;
                 color: #3f444d;
                 font-size: 1em;
-                font-family: FreeSans, sans-serif;
+                font-family: $secondary-font;
 
                 i {
                     font-size: 2em;
@@ -696,7 +797,7 @@ p.resume-subcategory {
 
 
     a {
-        font-family: FreeSans, sans-serif;
+        font-family: $secondary-font;
         font-weight: bold;
         font-size: 1em;
         color: $contactlinks-text-color;
@@ -736,13 +837,13 @@ p.resume-subcategory {
 // General
 
 blockquote {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-size: .9em;
     color: $text-color;
 }
 
 cite {
-    font-family: FreeSerif, serif;
+    font-family: $main-font;
     font-style: italic;
 }
 
@@ -931,7 +1032,7 @@ cite {
 footer {
     position: relative; // or just remove the position property
     width: 100vw;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     color: #444;
     font-size: .8em;
     padding: .2em 0 .1em 0;
@@ -962,6 +1063,15 @@ as-dithered-image {
     width: 131px;
 }
 
+.dithered-image {
+    display: block;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    top: 9vh;
+    image-rendering: pixelated;
+}
+
 .head_link {
     padding: 0;
 }
@@ -977,8 +1087,174 @@ img.image_header {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1; 
 }
 
 #content {
     flex: 1 0 auto;
+    padding-top: 1.2em;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    z-index: -100;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+    background: url("/img/nubes_transp.gif") no-repeat center center;
+    /* Fill the viewport while maintaining aspect ratio; scales responsively. */
+    background-size: cover;
+    background-attachment: fixed;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+hr {
+    border: 0;
+    border-top: 3px dotted $verde-chulo;
+    margin: 1rem 0;
+}
+
+main img {
+    display: block;
+    margin: 0 auto;
+    border: solid $verde-chulo;
+}
+
+.reading-progress {
+  position: fixed;
+  top: 19%;
+  left: 40px;
+  width: 24px;
+  height: 62%;
+  background-color: white;
+  //border: $verde-chulo 1px solid;
+  z-index: 199;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reading-progress-bar {
+  position: fixed;
+  top: 20%;
+  left: 50px;
+  width: 4px;
+  height: 60%;
+  background-color: $verde-chulo-muted;
+}
+
+.reading-progress.visible {
+  opacity: 1;
+}
+
+.reading-progress-fill {
+  width: 100%;
+  height: 0%;
+  background-color: $verde-chulo;
+  transition: height 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header markers on progress bar */
+.progress-header-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.progress-header-marker {
+  position: absolute;
+  left: -8px;
+  width: 20px;
+  height: 2px;
+  background-color: $verde-chulo;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.progress-header-marker::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -8px;
+  width: 32px;
+  height: 18px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.progress-header-marker:hover {
+  background-color: $text-color;
+  width: 24px;
+  left: -10px;
+}
+
+.progress-header-marker::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 28px;
+  top: -8px;
+  background: $text-color;
+  color: $code-background;
+  padding: 2px 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-family: $secondary-font;
+}
+
+.progress-header-marker:hover::after {
+  opacity: 1;
+}
+
+/* Previous reading position indicator */
+.progress-position-indicator {
+  position: absolute;
+  right: -12px;
+  width: 0;
+  height: 0;
+  border-right: 8px solid $medium-light-text;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.progress-position-indicator.visible {
+  opacity: 1;
+}
+
+.progress-position-indicator:hover {
+  border-right-color: #333;
+}
+
+/* Hide progress bar on mobile */
+@media (max-width: 768px) {
+  .reading-progress {
+    display: none;
+  }
+}
+
+img[src$='#floatleft']
+{
+	float:left;
+}
+
+img[src$='#floatright']
+{
+	float:right;
 }

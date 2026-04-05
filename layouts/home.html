@@ -1,5 +1,5 @@
 {{ define "main" }}
-    <main>
+    <main class="edge-frame">
         {{ $contentExists := gt (len .Content) 0 }}
         {{ $blogPages := where .Site.RegularPages.ByDate.Reverse ".Type" "in" .Site.Params.mainSections }}
         {{ $blogPages = where $blogPages ".Params.draft" "!=" true }}
@@ -23,8 +23,8 @@
         {{ end }}
 
         {{ if and (or $headlessExists $contentExists) $showLatest }}
-            <p class="delimiter">&diams; &diams; &diams;</p>
-
+        <span class="spacer"></span>
+            <hr>
             {{/*  {{ $blogLatest := default "Latest Blog Posts" site.Params.blogLatestHeading }}
             <h2 id="latest-blog-home">{{- $blogLatest -}}</h2>  */}}
         {{ end }}
