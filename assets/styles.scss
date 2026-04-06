@@ -395,7 +395,7 @@ nav ul {
 }
 
 nav li {
-    background-color: inherit;
+    background-color: white;
     float: left;
     cursor: pointer;
     padding: 0;
@@ -492,7 +492,7 @@ a.activetab {
     margin-right: calc(50% - 50vw);
     padding: 2vh 1.5vw 2.2vh;
     box-sizing: border-box;
-    background-color: white;
+    background-color: transparent;//white;
     text-align: center;
     display: flex;
     flex-flow: row wrap;
@@ -504,6 +504,7 @@ a.activetab {
     margin: 0 10vw 0 0;
     padding: 0 0 0 .25em;
     font-size: 2em;
+    background-color: white;
 }
 
 .myname a {
@@ -1116,6 +1117,14 @@ body::before {
     image-rendering: crisp-edges;
 }
 
+body.dev::before {
+    background: url("/img/nubes_smol.gif") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
 hr {
     border: 0;
     border-top: 3px dotted $verde-chulo;
@@ -1257,4 +1266,8 @@ img[src$='#floatleft']
 img[src$='#floatright']
 {
 	float:right;
+}
+
+.edge-frame {
+    padding-top: 1px;
 }

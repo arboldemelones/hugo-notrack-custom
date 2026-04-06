@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head.html" . -}}
-    <body>
+    <body class="{{ if .Site.Params.devBackground }}dev{{ end }}">
         <div class="site-wrapper">
             {{- partial "header.html" . -}}
             <div id="content">
