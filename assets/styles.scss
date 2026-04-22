@@ -1082,6 +1082,9 @@ img.image_header {
     max-width: 100%;
     height: auto;
     max-height: 6vh;
+    padding: 3px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .site-wrapper {
@@ -1139,23 +1142,23 @@ main img {
 
 .reading-progress {
   position: fixed;
-  top: 19%;
-  left: 40px;
-  width: 24px;
+  top: 18%;
+  left: unquote("max(calc((100% - #{$content-max-width}) / 2 - 5rem), 8rem)");
+  width: 2.5rem;
   height: 62%;
   background-color: white;
-  //border: $verde-chulo 1px solid;
   z-index: 199;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .reading-progress-bar {
-  position: fixed;
-  top: 20%;
-  left: 50px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 4px;
-  height: 60%;
+  height: 100%;
   background-color: $verde-chulo-muted;
 }
 
