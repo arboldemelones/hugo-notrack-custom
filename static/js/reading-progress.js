@@ -153,7 +153,7 @@
 		const windowHeight = window.innerHeight;
 		const scrollTop = window.pageYOffset;
 		const scrollableDistance = articleHeight - windowHeight;
-		const minScrollableDistance = windowHeight * 0.5;
+		const minScrollableDistance = windowHeight * 0.4;
 
 		if (scrollableDistance < minScrollableDistance) {
 			return { progress: 0, scrollTop, isShortArticle: true };
